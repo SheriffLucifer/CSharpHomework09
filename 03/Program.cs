@@ -1,12 +1,12 @@
-﻿// Задайте значения M и N. Напишите программу, 
-// которая найдёт сумму натуральных элементов в промежутке от M до N.
+﻿// Напишите программу вычисления функции Аккермана с 
+// помощью рекурсии. Даны два неотрицательных числа m и n.
 
 
 Console.Clear();
 int m = GetNumberFromUser("Введите целое число M: ", "Ошибка ввода!");
 int n = GetNumberFromUser("Введите целое число N: ", "Ошибка ввода!");
-int sumNumbers = GetSumNumbers(m, n);
-Console.WriteLine($"M = {m}; N = {n} -> {sumNumbers}");
+int sumNumbers = ShowAkkerman(m, n);
+Console.WriteLine($"M = {m}, N = {n} -> A(m,n) = {sumNumbers}");
 
 int GetNumberFromUser(string message, string errorMessage)
 {
@@ -20,8 +20,12 @@ int GetNumberFromUser(string message, string errorMessage)
     }
 }
 
-int GetSumNumbers(int m, int n)
+int ShowAkkerman(int m, int n)
 {
-    if (m == n) return n;
-    else return n + GetSumNumbers(m, n - 1);
+    if (m == 0)
+        return n + 1;
+    else if (m > 0 && n == 0)
+        return ShowAkkerman(m - 1, 1);
+    else
+        return ShowAkkerman(m - 1, ShowAkkerman(m, n - 1));
 }
